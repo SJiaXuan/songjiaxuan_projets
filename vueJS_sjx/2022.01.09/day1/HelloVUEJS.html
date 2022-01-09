@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DAY1</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>{{message}}</h1>
+      <h2>当前计数:{{bumber1}}</h2>
+
+      <ul>
+        <li v-for="item in list111">{{item}}</li>
+      </ul>
+      <button @click="add">+</button>
+    </div>
+    <button onclick="person()">点击</button>
+    <button onclick="pushList()">追加列表</button>
+    <button onclick="add1()">-</button>
+
+    <script src="../JS/vue.js"></script>
+    <script>
+      let app = new Vue({//实例的option
+        el: "#app",//String || HtmlElement   --DOM元素
+        data: {// Object || Function(组件中data必须是一个函数)  --数据对象
+          message: "你好，李焕英！！！",
+          list111: ["009", "西红柿首付", "我是你爸"],
+          bumber1: 0,
+        },
+        methods: {// [Key:string]:Function
+          add: function () {
+            console.log("加上了");
+            this.bumber1++;
+          },
+        },
+      });
+
+      function person() {
+        app.message = "去他丫的！！！";
+      }
+
+      function pushList() {
+        app.bumber1++;
+        let item='列A' + app.bumber1;
+        app.list111.push(item);
+      }
+      function add1(){
+        app.bumber1++;
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+Vue渐进式框架：作为应用一部分进行嵌入
+MVVM： Model View ViewModel  
+Vue的MVVM：
+    View：DOM
+    ViewModel:Vue
+    Model：JavaScript Objects
+开发中的方法与函数
+    方法：methods
+    函数：function
+Vue的生命周期
+    生命周期：事物从诞生到消亡的整个过程
+
