@@ -9,4 +9,7 @@ Vue的MVVM：
     函数：function
 Vue的生命周期
     生命周期：事物从诞生到消亡的整个过程
+代码规范
+    缩进4个空格，2个空格
+    CLI -> .editconfig 2个空格
 

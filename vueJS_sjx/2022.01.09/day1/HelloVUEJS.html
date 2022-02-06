@@ -1,53 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>DAY1</title>
-  </head>
 
-  <body>
-    <div id="app">
-      <h1>{{message}}</h1>
-      <h2>当前计数:{{bumber1}}</h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>DAY1</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
 
-      <ul>
-        <li v-for="item in list111">{{item}}</li>
-      </ul>
-      <button @click="add">+</button>
-    </div>
-    <button onclick="person()">点击</button>
-    <button onclick="pushList()">追加列表</button>
-    <button onclick="add1()">-</button>
+    .active {
+      color: red;
+    }
 
-    <script src="../JS/vue.js"></script>
-    <script>
-      let app = new Vue({//实例的option
-        el: "#app",//String || HtmlElement   --DOM元素
-        data: {// Object || Function(组件中data必须是一个函数)  --数据对象
-          message: "你好，李焕英！！！",
-          list111: ["009", "西红柿首付", "我是你爸"],
-          bumber1: 0,
+    .line {
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1 v-cloak>{{message}}</h1>
+    <h2>总价格：{{totalPrice}}</h2>
+    <h1 v-pre>{{message}}</h1>
+    <h2 v-text='message'></h2>
+    <h2 v-html='url'>{{url}}</h2>
+    <h1 v-once>{{fullname}}</h1>
+    <h1 :class="{active:bl1,line:!bl1}">{{message}}</h1>
+    <h1 :class="[active,line]">{{message}}</h1>
+    <h1 :class="change()">{{message}}</h1>
+
+    <h2>当前计数:{{bumber1}}</h2>
+    <img v-bind:src="iconurl" alt="">
+
+    <ul>
+      <li v-for="item in list111">{{item}}</li>
+    </ul>
+    <button @click="add" :class="{active:bl1,line:!bl1}">+</button>
+  </div>
+  <button onclick="person()">点击</button>
+  <button onclick="pushList()">追加列表</button>
+  <button onclick="add1()">-</button>
+
+  <script src="../JS/vue.js"></script>
+  <script>
+    // v-once 仅执行一次
+    //v-html 解析html元素
+    //v-text 文本元素
+    //v-pre 展示当前元素不作解析
+    //v-cloak 在vue解析之前有一个属性v-cloak;解析之后，div中没有一个属性v-cloak
+    //v-bind 动态绑定属性 简写 ‘:’
+    let app = new Vue({//实例的options
+      el: "#app",//String || HtmlElement   --DOM元素
+      data: {// Object || Function(组件中data必须是一个函数)  --数据对象
+        message: "你好，李焕英！！！",
+        list111: ["009", "西红柿首付", "熊大"],
+        bumber1: 0,
+        url: '<a href="https://www.baidu.com">百度一下</a>',
+        iconurl: 'https://v3.cn.vuejs.org/logo.png',
+        bl1: true,
+        bl2: false,
+        name1: '喜羊羊',
+        name2: '光头强',
+        books:[
+          {id:'001',name: '斗破',pice:78},
+          {id:'002',name: '斗罗',pice:88},
+          {id:'003',name: '万族之劫',pice:67},
+          {id:'004',name: '全球高五',pice:45},
+          {id:'005',name: '老鹰吃小鸡',pice:56},
+        ]
+      },
+      methods: {// [Key:string]:Function
+        add: function () {
+          console.log("加上了");
+          this.bumber1++;
+          if (this.bl1) {
+            this.bl1 = false;
+
+          } else {
+            this.bl1 = true;
+
+          }
         },
-        methods: {// [Key:string]:Function
-          add: function () {
-            console.log("加上了");
-            this.bumber1++;
-          },
+        change: function () {
+          return { active: this.bl1, line: !this.bl1 }
+        }
+      },
+      computed: {//计算函数 计算属性一般没有set方法
+        // fullname: {
+        //   set: function (params) {
+            
+        //   },
+        //   get function () {
+        //     return this.name1 + '与' + this.name2
+        //   },
+
+        // },
+        fullname: function () {
+          return this.name1 + '与' + this.name2
         },
-      });
+        totalPrice: function(){
+          let m = 0;
+          for(var i of this.books){
+            m += i.pice;
+          }
+          return m
+        }
+      }
+    });
 
-      function person() {
-        app.message = "去他丫的！！！";
-      }
+    function person() {
+      app.message = "Hello !!!";
+    }
 
-      function pushList() {
-        app.bumber1++;
-        let item='列A' + app.bumber1;
-        app.list111.push(item);
-      }
-      function add1(){
-        app.bumber1++;
-      }
-    </script>
-  </body>
+    function pushList() {
+      app.bumber1++;
+      let item = '列A' + app.bumber1;
+      app.list111.push(item);
+    }
+    function add1() {
+      app.bumber1++;
+    }
+  </script>
+</body>
+
 </html>
